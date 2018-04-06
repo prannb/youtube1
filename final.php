@@ -61,7 +61,7 @@ if ($client->getAccessToken()) {
 		$ids = fread($myfile,filesize("video_urls.txt"));
 		fclose($myfile);
 		$a = str_split($ids,11);
-		for ($i = 0; $i<100; $i++) {
+		for ($i = 0; $i<20; $i++) {
 			// echo "<pre>";
 			// $urls = array("hLQl3WQQoQ0", "YykjpeuMNEk");
 			$listResponse = $youtube->videos->listVideos("statistics,snippet",array('id' => $a[$i] ));
@@ -92,7 +92,7 @@ if ($client->getAccessToken()) {
 			// }
 		}
 
-		$conn->close();        
+		// $conn->close();        
         
   
 
