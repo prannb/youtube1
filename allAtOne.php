@@ -58,42 +58,46 @@ if ($client->getAccessToken()) {
     // currently authenticated user's channel.
 	    $htmlBody = '';
 
-		// $myfile = fopen("dataset.txt", "r");
-		// $ids = fread($myfile,filesize("video_urls.txt"));
-		// fclose($myfile);
-		// $a = str_split($ids,11);
-		
-		$video_id = $_POST["video"];
-		echo $video_id;
-		echo "<pre>";
-		// $urls = array("hLQl3WQQoQ0", "YykjpeuMNEk");
-		$listResponse = $youtube->videos->listVideos("statistics,snippet",array('id' => $video_id ));
-		$title = $listResponse[0]['snippet']['localized']['title'];
-		//$description = $listResponse[0]['snippet']['localized']['description'];
-		$view_count = $listResponse[0]['statistics']['viewCount'];
-		$likes = $listResponse[0]['statistics']['likeCount'];
-		$dislikes = $listResponse[0]['statistics']['dislikeCount'];
-		$comments = $listResponse[0]['statistics']['commentCount'];
-		$tags = $listResponse[0]['snippet']['tags'];
-		$def_language = $listResponse[0]['snippet']['defaultAudioLanguage'];
-		$thumbnail = $listResponse[0]['snippet']['thumbnails']['default']['url'];
-		$date = $listResponse[0]['snippet']['publishedAt'];
-		$channelId = $listResponse[0]['snippet']['channelId'];
-		$channelTitle = $listResponse[0]['snippet']['channelTitle'];
-		print_r($listResponse);
-		// print_r($channelId);
-		$sql = "INSERT INTO youtube 
-				(video_id, title, view_count, likes, dislikes, comments, def_language, channelId, channelTitle, thumbnail, tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10, tag11, tag12, tag13, tag14, tag15, tag16, tag17, tag18, tag19, tag20)
-				VALUES
-				('$video_id', '$title', '$view_count', '$likes', '$dislikes', '$comments', '$def_language', '$channelId', '$channelTitle', '$thumbnail', '$tags[0]', '$tags[1]', '$tags[2]', '$tags[3]', '$tags[4]', '$tags[5]', '$tags[6]', '$tags[7]', '$tags[8]', '$tags[9]', '$tags[10]', '$tags[11]', '$tags[12]', '$tags[13]', '$tags[14]', '$tags[15]', '$tags[16]', '$tags[17]', '$tags[18]', '$tags[19]')";
+		$myfile = fopen("dataset.txt", "r");
+		$ids = fread($myfile,filesize("dataset.txt"));
+		fclose($myfile);
+		$a = str_split($ids,11);
+		for ($i = 2922; $i<28000; $i++) {
+			echo "<pre>";
+			$video_id = $a[$i];
+			// $urls = array("hLQl3WQQoQ0", "YykjpeuMNEk");
+			$listResponse = $youtube->videos->listVideos("statistics,snippet",array('id' => $video_id ));
+			$title = $listResponse[0]['snippet']['localized']['title'];
+			//$description = $listResponse[0]['snippet']['localized']['description'];
+			$view_count = $listResponse[0]['statistics']['viewCount'];
+			$likes = $listResponse[0]['statistics']['likeCount'];
+			$dislikes = $listResponse[0]['statistics']['dislikeCount'];
+			$comments = $listResponse[0]['statistics']['commentCount'];
+			$duration = $listResponse[0]['contentDetail']['duration'];
+			$tags = $listResponse[0]['snippet']['tags'];
+			$def_language = $listResponse[0]['snippet']['defaultAudioLanguage'];
+			$thumbnail = $listResponse[0]['snippet']['thumbnails']['default']['url'];
+			$date = $listResponse[0]['snippet']['publishedAt'];
+			$channelId = $listResponse[0]['snippet']['channelId'];
+			$channelTitle = $listResponse[0]['snippet']['channelTitle'];
+			// print_r($listResponse);
+			// print_r($channelId);
+			$sql = "INSERT INTO youtube 
+					(video_id, title, view_count, likes, dislikes, comments, def_language, channelId, channelTitle, thumbnail, tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10, tag11, tag12, tag13, tag14, tag15, tag16, tag17, tag18, tag19, tag20)
+					VALUES
+					('$video_id', '$title', '$view_count', '$likes', '$dislikes', '$comments', '$def_language', '$channelId', '$channelTitle', '$thumbnail', '$tags[0]', '$tags[1]', '$tags[2]', '$tags[3]', '$tags[4]', '$tags[5]', '$tags[6]', '$tags[7]', '$tags[8]', '$tags[9]', '$tags[10]', '$tags[11]', '$tags[12]', '$tags[13]', '$tags[14]', '$tags[15]', '$tags[16]', '$tags[17]', '$tags[18]', '$tags[19]')";
 
-		if ($conn->query($sql) === TRUE) {
-			$msg = "New record created successfully";
-			//header('Location: /projects/youtube/');
-		} else {
-			$msg = "Error: ".$sql."<br>".$conn->error;
+			if ($conn->query($sql) === TRUE) {
+				$msg = "New record created successfully";
+				//header('Location: /projects/youtube/');
+			} else {
+				$msg = "Error: " . $sql . "<br>" . $conn->error;
+			}
 		}
-	$conn->close();        
+
+		$conn->close();        
+        
+  
 
   } catch (Google_Service_Exception $e) {
     $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
@@ -135,16 +139,6 @@ END;
 <div style="text-align:center;">
 <?=$htmlAuthorize?>
 </div>
-
-<div>
-	<form action=""  method="post" align="center">
-		VIDEO_ID:<br>
-		<input type="text" name="video">
-		<br><br>
-		<input type="submit" value="Submit">
-	</form>
-</div>
-
 <div style="text-align:center;">
 	<?=$msg?>
 </div>

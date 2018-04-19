@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	.ui-slider-popup{
+		width : 80px !important;
+		height: 10px !important;
+		font-size: 14px !important;
+	}
+
+	.ui-slider-track .ui-btn.ui-slider-handle {
+		width: 2px;	
+	}
+
+	input[type=text], select {
+	    width: 100%;
+	    height: 100%;
+	    padding: 12px 20px;
+	    margin: 8px 0;
+	    display: inline-block;
+	    border: 1px solid #ccc;
+	    border-radius: 4px;
+	    box-sizing: border-box;
+	}
+
+	input[type=submit] {
+	    width: 100%;
+	    height: 100%;
+	    background-color: #4CAF50;
+	    color: white;
+	    padding: 14px 20px;
+	    margin: 8px 0;
+	    border: none;
+	    border-radius: 4px;
+	    cursor: pointer;
+	}
+
+	input[type=submit]:hover {
+		height: 100%;
+	    background-color: #45a049;
+	}
+
+	div {
+	    border-radius: 5px;
+	    background-color: #f2f2f2;
+	    padding: 0px;
+	}
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<div data-role="page">
+  <div data-role="header">
+    <h1>YouTube Query Platform</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <form method="post" action="action.php">
+
+
+    	<label for="Search">Search</label>
+	    <input type="text" id="token" name="token" placeholder="Search for..">
+
+	    <label for="Language">Language</label>
+	    <select id="language" name="language">
+	      <option value="English">English</option>
+	      <option value="Hindi">Hindi</option>
+	      <option value="Vietnamese">Vietnamese</option>
+	      <option value="Tamil">Tamil</option>
+	      <option value="Chinese">Chinese</option>
+	      <option value="French">French</option>
+	      <option value="Urdu">Urdu</option>
+	      <option value="Korean">Korean</option>
+	      <option value="Filipino">Filipino</option>
+	      <option value="Punjabi">Punjabi</option>
+	      <option value="Russian">Russian</option>
+	      <option value="Telugu">Telugu</option>
+	      <option value="Persian">Persian</option>
+	      <option value="Arabic">Arabic</option>
+	      <option value="Malayalam">Malayalam</option>
+	    </select>
+
+      <div data-role="rangeslider">
+        <label for="Views-min">Views:</label>
+        <input type="range" name="Views-min" id="Views-min" value="0" min="0" max="1200000000" data-popup-enabled="true">
+        <label for="Views-max">Views:</label>
+        <input type="range" name="Views-max" id="Views-max" value="1200000000" min="0" max="1200000000" data-popup-enabled="true">
+      </div>
+      
+      <div data-role="rangeslider">
+        <label for="Likes-min">Likes:</label>
+        <input type="range" name="Likes-min" id="Likes-min" value="0" min="0" max="6200000" data-popup-enabled="true">
+        <label for="Likes-max">Likes:</label>
+        <input type="range" name="Likes-max" id="Likes-max" value="6200000" min="0" max="6200000" data-popup-enabled="true">
+      </div>
+
+      <div data-role="rangeslider">
+        <label for="Comments-min">Comments:</label>
+        <input type="range" name="Comments-min" id="Comments-min" value="0" min="0" max="1000000" data-popup-enabled="true">
+        <label for="Comments-max">Comments:</label>
+        <input type="range" name="Comments-max" id="Comments-max" value="1000000" min="0" max="1000000" data-popup-enabled="true">
+      </div>
+
+      <div data-role="rangeslider">
+        <label for="Dislikes-min">Dislikes:</label>
+		<input type="range" name="Dislikes-min" id="Dislikes-min" value="5000" min="0" max="1000000000" data-popup-enabled="true">        
+		<label for="Dislikes-max">Dislikes:</label>
+        <input type="range" name="Dislikes-max" id="Dislikes-max" value="2000000" min="0" max="2000000" data-popup-enabled="true">
+      </div>
+      
+        <input type="submit" data-inline="true" value="Submit">
+      </form>
+  </div>
+</div> 
+
+</body>
+</html>
